@@ -15,6 +15,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool loading = false;
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -24,6 +25,32 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
     _passwordController.dispose();
     _emailController.dispose();
+  }
+
+  void logIn() {
+    setState(() {
+      loading = true;
+    });
+
+    _auth
+        .createUserWithEmailAndPassword(
+            email: _emailController.text, password: _passwordController.text)
+        .then((value) {
+      setState(() {
+        loading = false;
+      });
+
+      Navigator.push(
+          context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+    }).onError((error, stackTrace) {
+      debugPrint(error.toString());
+
+      Utils().tosterMessage(error.toString());
+      debugPrint(error.toString());
+      setState(() {
+        loading = false;
+      });
+    });
   }
 
   @override
@@ -100,8 +127,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Password connot be empty';
-                              } else if (value.length < 8) {
-                                return 'Password must be at least 8 characters';
+                              } else if (value.length < 6) {
+                                return 'Password must be at least 6 characters';
                               }
                               return null;
                             },
@@ -113,21 +140,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
                           RoundedButton(
                               title: 'Login',
+                              loading: loading,
                               onTap: () {
-                                _auth
-                                    .createUserWithEmailAndPassword(
-                                        email: _emailController.text.toString(),
-                                        password:
-                                            _passwordController.text.toString())
-                                    .then((value) {
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (_) => const HomeScreen()));
-                                }).onError((error, stackTrace) {
-                                  Utils().tosterMessage(error.toString());
-                                });
-                                if (_formKey.currentState!.validate()) {}
+                                if (_formKey.currentState!.validate()) {
+                                  logIn();
+                                }
                               }),
 
                           Row(

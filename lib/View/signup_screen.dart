@@ -25,6 +25,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _emailController.dispose();
   }
 
+  void signUp() {
+    setState(() {
+      loading = true;
+    });
+
+    _auth
+        .createUserWithEmailAndPassword(
+            email: _emailController.text, password: _passwordController.text)
+        .then((value) {
+      setState(() {
+        loading = false;
+      });
+
+      Navigator.push(
+          context, MaterialPageRoute(builder: (_) => const LoginScreen()));
+    }).onError((error, stackTrace) {
+      Utils().tosterMessage(error.toString());
+      setState(() {
+        loading = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,8 +126,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Password connot be empty';
-                            } else if (value.length < 8) {
-                              return 'Password must be at least 8 characters';
+                            } else if (value.length < 6) {
+                              return 'Password must be at least 6 characters';
                             }
                             return null;
                           },
@@ -119,31 +142,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             loading: loading,
                             onTap: () {
                               if (_formKey.currentState!.validate()) {
-                                setState(() {
-                                  loading = true;
-                                });
+                                signUp();
                               }
-                              _auth
-                                  .createUserWithEmailAndPassword(
-                                      email: _emailController.text,
-                                      password: _passwordController.text)
-                                  .then((value) {
-                                setState(() {
-                                  loading = false;
-                                });
-
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => const LoginScreen()));
-                              }).onError((error, stackTrace) {
-                                setState(() {
-                                  loading = false;
-                                });
-
-                                Utils().tosterMessage(error.toString());
-                              });
-                            })
+                            }),
                       ],
                     )),
 
