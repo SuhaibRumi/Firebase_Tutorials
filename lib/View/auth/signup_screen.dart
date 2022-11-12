@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_tutorials/View/login_screen.dart';
+import 'package:firebase_tutorials/View/auth/login_screen.dart';
 import 'package:firebase_tutorials/utils/utils.dart';
 import 'package:firebase_tutorials/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +41,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       Navigator.push(
           context, MaterialPageRoute(builder: (_) => const LoginScreen()));
     }).onError((error, stackTrace) {
-      Utils().tosterMessage(error.toString());
+            Utils().tosterMessage(error.toString());
       setState(() {
         loading = false;
       });
@@ -51,7 +51,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         elevation: 5,
         centerTitle: true,

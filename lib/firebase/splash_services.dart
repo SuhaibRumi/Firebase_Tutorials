@@ -1,5 +1,6 @@
 import 'dart:async';
-import '../View/view.dart';
+import '../View/auth/auth.dart';
+
 import 'package:flutter/material.dart';
 
 class SplashServices {

@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_tutorials/View/home_screen.dart';
-import 'package:firebase_tutorials/View/signup_screen.dart';
+import 'package:firebase_tutorials/View/posts/home_screen.dart';
+import 'package:firebase_tutorials/View/auth/signup_screen.dart';
 import 'package:firebase_tutorials/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../utils/utils.dart';
+import '../../utils/utils.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -31,22 +31,18 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       loading = true;
     });
-
     _auth
-        .createUserWithEmailAndPassword(
+        .signInWithEmailAndPassword(
             email: _emailController.text, password: _passwordController.text)
         .then((value) {
       setState(() {
         loading = false;
       });
-
       Navigator.push(
           context, MaterialPageRoute(builder: (_) => const HomeScreen()));
     }).onError((error, stackTrace) {
-      debugPrint(error.toString());
-
       Utils().tosterMessage(error.toString());
-      debugPrint(error.toString());
+
       setState(() {
         loading = false;
       });
@@ -61,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
         return true;
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey[100],
         appBar: AppBar(
           elevation: 5,
           centerTitle: true,
@@ -115,6 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(
                             height: 20,
                           ),
+
                           // TextField for password..//
                           TextFormField(
                             controller: _passwordController,
@@ -128,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (value!.isEmpty) {
                                 return 'Password connot be empty';
                               } else if (value.length < 6) {
-                                return 'Password must be at least 6 characters';
+                                // return 'Password must be at least 6 characters';
                               }
                               return null;
                             },
@@ -136,6 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(
                             height: 30,
                           ),
+
                           // reuseableButton//
 
                           RoundedButton(
