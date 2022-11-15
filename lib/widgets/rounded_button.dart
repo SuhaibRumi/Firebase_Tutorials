@@ -19,8 +19,8 @@ class RoundedButton extends StatelessWidget {
         height: 50,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          color: Colors.orange,
-          borderRadius: BorderRadius.circular(10),
+          color: Colors.amber,
+          borderRadius: BorderRadius.circular(30),
         ),
         child: Center(
           child: loading
@@ -31,9 +31,10 @@ class RoundedButton extends StatelessWidget {
               : Text(
                   title,
                   style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: "Merriweather & Merriweather Sans"),
                   textAlign: TextAlign.center,
                 ),
         ),

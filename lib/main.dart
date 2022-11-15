@@ -17,9 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'FireBase Tutorial  ',
-      theme: ThemeData(
-        primarySwatch: Colors.orange,
-      ),
+      theme: ThemeData(primarySwatch: Colors.orange ),
       home: const SplashScreen(),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_tutorials/View/auth/login_with_phone.dart';
 import 'package:firebase_tutorials/View/posts/home_screen.dart';
 import 'package:firebase_tutorials/View/auth/signup_screen.dart';
 import 'package:firebase_tutorials/widgets/rounded_button.dart';
@@ -57,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
         return true;
       },
       child: Scaffold(
-        backgroundColor: Colors.grey[100],
+        backgroundColor: Colors.white,
         appBar: AppBar(
           elevation: 5,
           centerTitle: true,
@@ -161,9 +162,61 @@ class _LoginScreenState extends State<LoginScreen> {
                                   "Sign Up ",
                                   style: TextStyle(fontSize: 16),
                                 ),
-                              )
+                              ),
                             ],
                           ),
+                          // const SizedBox(
+                          //   height: 20,
+                          // ),
+                          RichText(
+                              text: const TextSpan(
+                                  text: "Or",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ))),
+                          const SizedBox(
+                            height: 20,
+                          ),
+
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => const LoginWithPhone()));
+                            },
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  border: Border.all(color: Colors.black)),
+                              child: Center(
+                                  child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    "assets/icons/call.png",
+                                    width: 20,
+                                    height: 20,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  const Text(
+                                    "Sign Up",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily:
+                                            "Merriweather & Merriweather Sans"),
+                                  ),
+                                ],
+                              )),
+                            ),
+                          )
                         ],
                       )),
                 ],
