@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_tutorials/View/auth/auth.dart';
+import 'package:firebase_tutorials/View/posts/post.dart';
+import 'package:firebase_tutorials/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,18 +26,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   auth.signOut().then((value) {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (_) => const LoginScreen()));
+                  }).onError((error, stackTrace) {
+                    Utils().tosterMessage(error.toString());
                   });
                 },
                 icon: const Icon(Icons.logout_rounded))
           ],
-        ),
-        body: Container(
-          color: Colors.grey[100],
-          child: const Center(
-              child: Text(
-            "Welcome",
-            style: TextStyle(fontSize: 20),
-          )),
-        ));
+        ),floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AddPostScreen()));
+        },
+      ),
+        
+        );
   }
 }

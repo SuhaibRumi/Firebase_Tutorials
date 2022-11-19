@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_tutorials/View/auth/verify_Code_screen.dart';
+import 'package:firebase_tutorials/View/posts/add_post_screen.dart';
 import 'package:firebase_tutorials/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +24,7 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
       appBar: AppBar(
         title: const Text("Login With Phone"),
       ),
+      
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
