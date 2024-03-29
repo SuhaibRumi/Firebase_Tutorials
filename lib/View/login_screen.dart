@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_tutorials/View/home_screen.dart';
 import 'package:firebase_tutorials/View/signup_screen.dart';
 import 'package:firebase_tutorials/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
@@ -28,11 +27,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        SystemNavigator.pop();
-        return true;
-      },
+    return PopScope(
+      canPop:false,
+     onPopInvoked:(didPop){
+       SystemNavigator.pop();
+     },
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
